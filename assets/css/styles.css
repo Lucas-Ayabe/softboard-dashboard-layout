@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&display=swap');
+
+:root {
+    --primary-lighter: #ffca28;
+    --primary-light: #ffc107;
+    --primary: #ffa000;
+    --primary-dark: #ffa000;
+    --primary-darker: #ffa000;
+    --light: #f8f7f7;
+    --dark: #0f0a00;
+    --ui-background: var(--light);
+    --ui-background-secondary: var(--dark);
+    --ui-color: var(--dark);
+    --ui-color-secondary: var(--light);
+
+    --gutter: 1rem;
+
+    --sidebar-gutter: 0;
+
+    --family: 'Rubik', sans-serif;
+    --helper: 0.85em;
+    --body: 1em;
+    --sub-heading: 1.75em;
+    --heading: 2.25em;
+    --display: 5.25em;
+
+    font-size: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: var(--family, 'Rubik', sans-serif);
+    font-size: 100%;
+    min-height: 100vh;
+    background: var(--ui-background, #f8f7f7);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 500;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 50rem;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--gutter, 1rem);
+    padding-right: var(--gutter, 1rem);
+}
+
+.recursive-stack,
+.stack {
+    --space: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.recursive-stack *,
+.stack > * {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.recursive-stack * + *,
+.stack > * + * {
+    margin-top: var(--space, 1em);
+}
+
+.stack > .split {
+    margin-bottom: auto;
+}
+
+.with-sidebar {
+    overflow: hidden;
+}
+
+.with-sidebar > * {
+    display: flex;
+    flex-wrap: wrap;
+    margin: calc(var(--sidebar-gutter) / 2 * -1);
+}
+
+.with-sidebar > * > * {
+    margin: calc(var(--sidebar-gutter) / 2);
+    flex-basis: 250px;
+    flex-grow: 1;
+}
+
+.with-sidebar > * > :last-child {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: calc(50% - var(--sidebar-gutter));
+}
+
+.section {
+    --section-padding: 3rem;
+    padding-top: var(--section-padding, 3rem);
+    padding-bottom: var(--section-padding, 3rem);
+}
+
+.dashboard > .wrapper {
+    height: 100%;
+}
+
+.dashboard .sidebar {
+    background: var(--ui-background-secondary);
+    color: var(--ui-color-secondary);
+    max-height: 100vh;
+
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: -100%;
+    width: 100%;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.dashboard .sidebar[aria-expanded='true'] {
+    left: 0;
+}
+
+.dashboard .main-panel {
+    background: var(--ui-background, #fff);
+    color: var(--ui-color, #000);
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dashboard .main-panel > .nav {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.dashboard .main-panel.with-fixed-nav > .content {
+    max-height: calc(100vh - 61px);
+    overflow-y: auto;
+}
+
+@media screen and (min-width: 568px) {
+    .dashboard .sidebar {
+        position: static;
+        max-width: 0;
+    }
+
+    .dashboard .sidebar[aria-expanded='true'] {
+        max-width: 100%;
+    }
+}
+
+.nav {
+    box-sizing: content-box;
+    height: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.nav > .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.nav.sidebar > .container,
+.nav.sidebar {
+    align-items: flex-start;
+    height: auto;
+}
+
+.nav.sidebar {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.nav.sidebar.-center {
+    text-align: center;
+}
+
+.nav .brand {
+    display: none;
+    color: var(--ui-color);
+}
+
+.nav.sidebar .brand {
+    display: block;
+    color: var(--ui-color-secondary);
+}
+
+.nav .menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav .menu.stack {
+    flex-direction: column;
+    height: 100%;
+}
+
+.nav .link {
+    display: block;
+    padding: 0.5em 0.75em;
+    color: var(--ui-color);
+    transition: all 0.3s ease-in-out;
+}
+
+.nav .link:hover,
+.nav.sidebar .link:hover {
+    color: var(--primary);
+}
+
+.nav.sidebar .link {
+    color: var(--ui-color-secondary);
+}
+
+@media screen and (min-width: 568px) {
+    .nav .brand {
+        display: block;
+    }
+}
+
+.hamburger {
+    position: relative;
+    width: 48px;
+    height: 30px;
+    background: transparent;
+    border: 0 solid transparent;
+    border-radius: 4px;
+    margin-bottom: auto;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.hamburger:focus {
+    outline: none;
+    border: 1px dotted #fff;
+    border-top: 0 solid transparent;
+}
+
+.hamburger .item {
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: #000;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger .item:nth-child(1) {
+    transform: translate3d(-50%, -8px, 0);
+}
+
+.hamburger .item:nth-child(2) {
+    transform: translate3d(-50%, 0, 0);
+}
+
+.hamburger .item:nth-child(3) {
+    transform: translate3d(-50%, 8px, 0);
+}
+
+.hamburger.is-active .item {
+    background: #fff;
+}
+
+.hamburger.is-active .item:nth-child(1) {
+    transform: translate3d(-50%, 0, 0) rotate(45deg);
+}
+
+.hamburger.is-active .item:nth-child(2) {
+    transform: translate3d(-50%, 0, 0) rotate(-45deg);
+}
+
+.hamburger.is-active .item:nth-child(3) {
+    transform: translate3d(-50%, 0, 0) rotate(-45deg);
+}
+
+@media screen and (min-width: 568px) {
+    .hamburger:focus {
+        outline-color: #000;
+    }
+
+    .hamburger .item,
+    .hamburger.is-active .item {
+        background: #000;
+    }
+}
+
+.mt-auto {
+    margin-top: auto !important;
+}
+
+.mb-auto {
+    margin-bottom: auto !important;
+}
+
+.h-100 {
+    height: 100vh !important;
+}
