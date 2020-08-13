@@ -281,7 +281,7 @@ a {
     display: block;
     width: 32px;
     height: 2px;
-    background: #000;
+    background: var(--ui-background-secondary);
     position: absolute;
     top: 50%;
     left: 50%;
@@ -302,7 +302,7 @@ a {
 }
 
 .hamburger.is-active .item {
-    background: #fff;
+    background: var(--ui-background-secondary);
 }
 
 .hamburger.is-active .item:nth-child(1) {
@@ -319,18 +319,18 @@ a {
 
 @media screen and (min-width: 568px) {
     .hamburger:focus {
-        outline-color: #000;
+        outline-color: var(--ui-background-secondary);
     }
 
     .hamburger .item,
     .hamburger.is-active .item {
-        background: #000;
+        background: var(--ui-background-secondary);
     }
 }
 
 .dark-theme {
     --ui-background: var(--dark);
-    --ui-background-secondary: var(--primary);
+    --ui-background-secondary: var(--light);
     --ui-color: var(--light);
     --ui-color-secondary: var(--dark);
     --nav-background: #000;
