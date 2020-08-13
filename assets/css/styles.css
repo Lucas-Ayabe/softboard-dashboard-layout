@@ -7,7 +7,8 @@
     --primary-dark: #ffa000;
     --primary-darker: #ffa000;
     --light: #f8f7f7;
-    --dark: #0f0a00;
+    --dark: hsl(40, 5%, 10%);
+    --darker: hsl(40, 100%, 2%);
     --ui-background: var(--light);
     --ui-background-secondary: var(--dark);
     --ui-color: var(--dark);
@@ -16,6 +17,10 @@
     --gutter: 1rem;
 
     --sidebar-gutter: 0;
+    --sidebar-background: var(--darker);
+    --sidebar-color: var(--light);
+
+    --nav-background: #fff;
 
     --family: 'Rubik', sans-serif;
     --helper: 0.85em;
@@ -119,8 +124,8 @@ a {
 }
 
 .dashboard .sidebar {
-    background: var(--ui-background-secondary);
-    color: var(--ui-color-secondary);
+    background: var(--sidebar-background);
+    color: var(--sidebar-color);
     max-height: 100vh;
 
     position: fixed;
@@ -147,7 +152,7 @@ a {
 }
 
 .dashboard .main-panel > .nav {
-    background: #fff;
+    background: var(--nav-background, #fff);
     box-shadow: 0 2px 4px rgba(15, 10, 0, 0.3);
 }
 
@@ -158,7 +163,6 @@ a {
 
 @media screen and (min-width: 568px) {
     .dashboard .sidebar {
-        /* box-shadow: 4px 0 8px rgba(15, 10, 0, 0.3); */
         position: relative;
         top: 0;
         left: 0;
@@ -208,7 +212,7 @@ a {
 
 .nav.sidebar .brand {
     display: block;
-    color: var(--ui-color-secondary);
+    color: var(--sidebar-color);
 }
 
 .nav .menu {
@@ -217,8 +221,15 @@ a {
 }
 
 .nav .menu.stack {
+    padding-left: 100px;
+    padding-right: 20px;
     flex-direction: column;
     height: 100%;
+}
+
+.nav .item {
+    display: flex;
+    align-items: center;
 }
 
 .nav .link {
@@ -234,12 +245,17 @@ a {
 }
 
 .nav.sidebar .link {
-    color: var(--ui-color-secondary);
+    color: var(--sidebar-color);
 }
 
 @media screen and (min-width: 568px) {
     .nav .brand {
         display: block;
+    }
+
+    .nav .menu.stack {
+        padding-left: 30px;
+        padding-right: 30px;
     }
 }
 
@@ -310,6 +326,14 @@ a {
     .hamburger.is-active .item {
         background: #000;
     }
+}
+
+.dark-theme {
+    --ui-background: var(--dark);
+    --ui-background-secondary: var(--primary);
+    --ui-color: var(--light);
+    --ui-color-secondary: var(--dark);
+    --nav-background: #000;
 }
 
 .mt-auto {

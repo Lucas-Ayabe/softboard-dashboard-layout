@@ -22,8 +22,12 @@ const onEvent = (event) => (element) => (callback) => {
     return callback;
 };
 
-const onClick = onEvent('click');
+const matchMedia = (expression) => window.matchMedia(expression).matches;
 
+const onClick = onEvent('click');
+const onChange = onEvent('change');
+
+const themeButton = select('#theme[type=checkbox]');
 const hamburger = select('.hamburger[data-target]');
 
 /**
@@ -33,7 +37,6 @@ const hamburger = select('.hamburger[data-target]');
 const toggleHamburger = (hamburger) => {
     const { target } = hamburger.dataset;
     const nav = select(target);
-    console.log(hamburger);
     if (nav) {
         const navState = nav.getAttribute('aria-expanded') === 'true';
         hamburger.classList.toggle('is-active');
@@ -44,4 +47,16 @@ const toggleHamburger = (hamburger) => {
 if (hamburger) {
     const onClickInHamburger = onClick(hamburger);
     onClickInHamburger(({ currentTarget }) => toggleHamburger(currentTarget));
+
+    if (matchMedia('(min-width: 568px)')) {
+        toggleHamburger(hamburger);
+    }
+}
+
+if (themeButton) {
+    const onChangeInTheme = onChange(themeButton);
+
+    onChangeInTheme(() => {
+        document.documentElement.classList.toggle('dark-theme');
+    });
 }
