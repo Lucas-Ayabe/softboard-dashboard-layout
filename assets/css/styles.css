@@ -147,7 +147,8 @@ a {
 }
 
 .dashboard .main-panel > .nav {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(15, 10, 0, 0.3);
 }
 
 .dashboard .main-panel.with-fixed-nav > .content {
@@ -157,7 +158,12 @@ a {
 
 @media screen and (min-width: 568px) {
     .dashboard .sidebar {
-        position: static;
+        /* box-shadow: 4px 0 8px rgba(15, 10, 0, 0.3); */
+        position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
         max-width: 0;
     }
 
