@@ -302,7 +302,7 @@ a {
 }
 
 .hamburger.is-active .item {
-    background: var(--ui-background-secondary);
+    background: var(--light);
 }
 
 .hamburger.is-active .item:nth-child(1) {
@@ -319,7 +319,7 @@ a {
 
 @media screen and (min-width: 568px) {
     .hamburger:focus {
-        outline-color: var(--ui-background-secondary);
+        outline-color: var(--light);
     }
 
     .hamburger .item,
